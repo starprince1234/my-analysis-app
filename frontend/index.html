@@ -1,0 +1,54 @@
+<!-- /my-analysis-app/frontend/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multi-function Analysis Platform</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <h1>多功能分析平台</h1>
+    </header>
+
+    <main>
+        <div class="card">
+            <h2><span class="step-number">1</span> 上传CSV数据文件</h2>
+            <input type="file" id="fileInput" accept=".csv">
+            <button id="uploadButton">上传文件</button>
+            <p id="uploadStatus" class="status-text"></p>
+        </div>
+
+        <div class="card hidden" id="processingControls">
+            <h2><span class="step-number">2</span> 选择并开始分析任务</h2>
+            <div class="button-group">
+                <!-- 对应应力分析 [6] -->
+                <button class="task-button" data-task="stress">生成应力分析动画</button> 
+                <!-- 对应结节检测 [4] -->
+                <button class="task-button" data-task="nodule">运行结节检测动画</button>
+                <!-- 对应统计分析 [4] -->
+                <button class="task-button" data-task="stats">执行统计特征分析</button>
+            </div>
+        </div>
+
+        <div class="card hidden" id="progressArea">
+            <h2><span class="step-number">3</span> 处理进度</h2>
+            <div class="progress-bar-container">
+                <div class="progress-bar" id="progressBar"></div>
+            </div>
+            <p id="progressText" class="status-text">0%</p>
+        </div>
+
+        <div class="card hidden" id="resultArea">
+            <h2><span class="step-number">4</span> 分析结果</h2>
+            <div id="resultDisplay"></div>
+        </div>
+    </main>
+
+    <!-- 引入Socket.IO客户端库 -->
+    <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
+    <!-- 引入我们自己的JS逻辑 -->
+    <script src="js/main.js"></script>
+</body>
+</html>

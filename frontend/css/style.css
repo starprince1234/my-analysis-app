@@ -1,0 +1,131 @@
+/* /my-analysis-app/frontend/css/style.css */
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: #f0f2f5;
+    color: #333;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+header {
+    width: 100%;
+    max-width: 800px;
+    text-align: center;
+    margin-bottom: 20px;
+    color: #1a237e;
+}
+
+main {
+    width: 100%;
+    max-width: 800px;
+}
+
+.card {
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 25px;
+    margin-bottom: 20px;
+}
+
+.card h2 {
+    margin-top: 0;
+    color: #3f51b5;
+    border-bottom: 2px solid #e8eaf6;
+    padding-bottom: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.step-number {
+    display: inline-block;
+    background-color: #3f51b5;
+    color: white;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    margin-right: 15px;
+    font-size: 16px;
+}
+
+input[type="file"] {
+    display: block;
+    margin-bottom: 15px;
+}
+
+button {
+    background-color: #3f51b5;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #303f9f;
+}
+
+.button-group .task-button {
+    margin-right: 10px;
+    margin-bottom: 10px;
+    background-color: #1e88e5;
+}
+
+.button-group .task-button:hover {
+    background-color: #1565c0;
+}
+
+.hidden {
+    display: none;
+}
+
+.status-text {
+    margin-top: 15px;
+    font-style: italic;
+    color: #555;
+}
+
+.progress-bar-container {
+    width: 100%;
+    background-color: #e0e0e0;
+    border-radius: 5px;
+    overflow: hidden;
+    margin-top: 10px;
+}
+
+.progress-bar {
+    width: 0%;
+    height: 25px;
+    background-color: #4caf50;
+    text-align: center;
+    line-height: 25px;
+    color: white;
+    transition: width 0.4s ease;
+}
+
+#resultDisplay img {
+    max-width: 100%;
+    height: auto;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 5px;
+    margin-bottom: 15px;
+}
+
+#resultDisplay pre {
+    background-color: #282c34;
+    color: #abb2bf;
+    padding: 15px;
+    border-radius: 5px;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}

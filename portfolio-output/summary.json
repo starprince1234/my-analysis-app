@@ -1,0 +1,82 @@
+{
+  "title": "多功能分析平台",
+  "slug": "multi-analysis-platform",
+  "description": "面向传感矩阵 CSV 数据的实时分析工具，提供应力可视化、结节检测与统计聚类三类分析能力。",
+  "longDescription": "多功能分析平台把传感器矩阵数据（12×8 = 96 通道）的常见科学分析流程从本地脚本迁移到 Web 端。用户通过浏览器上传一份 CSV，即可一键触发应力演化动图、结节检测动图、统计聚类报告三类任务，处理过程通过 WebSocket 实时推送进度，结果以 GIF / 图像 / JSON 形式直接在页面查看。后端基于 Flask + Flask-SocketIO + Gunicorn(eventlet) 单进程异步实现，算法层使用 numpy / matplotlib / scikit-learn / scikit-image，部署借助 Nginx + Docker Compose 完成最小化生产配置。",
+  "type": "Web 应用 / 数据分析工具",
+  "status": "可演示原型",
+  "role": ["全栈开发", "产品设计", "可视化与算法"],
+  "techStack": [
+    "Python 3.12",
+    "Flask 3.1",
+    "Flask-SocketIO 5.5",
+    "Gunicorn",
+    "eventlet",
+    "pandas",
+    "numpy",
+    "matplotlib",
+    "Pillow",
+    "scikit-learn",
+    "scikit-image",
+    "HTML",
+    "CSS",
+    "JavaScript",
+    "Socket.IO Client",
+    "Nginx",
+    "Docker",
+    "Docker Compose"
+  ],
+  "features": [
+    {
+      "name": "CSV 上传与校验",
+      "description": "浏览器选择 CSV 文件，后端用 UUID 重命名后落盘，返回 file_id 供后续任务复用。"
+    },
+    {
+      "name": "应力分析动图",
+      "description": "将 96 通道重塑为 12×8 矩阵，逐帧渲染 2D 热力图、3D 曲面、等高线与统计面板，合成 GIF。"
+    },
+    {
+      "name": "结节检测动图",
+      "description": "使用高斯混合模型分离前景，叠加形态学闭运算，跟踪连通域的面积、圆度、强度演化。"
+    },
+    {
+      "name": "统计特征分析",
+      "description": "对每列时间序列做 FFT，取平均幅值后通过 StandardScaler + KMeans 完成 3 类聚类，输出散点图与 JSON 报告。"
+    },
+    {
+      "name": "WebSocket 实时进度",
+      "description": "所有任务统一通过 Socket.IO 推送 progress_update / task_complete / error 事件，前端即时更新进度条。"
+    }
+  ],
+  "highlights": [
+    "统一的实时进度协议，新增分析任务只需扩展一个 task type",
+    "算法逻辑与渲染/IO 解耦，logic/*.py 模块可独立调用与测试",
+    "零数据库部署：文件系统 + UUID 命名即作为最简持久层",
+    "应力分析单帧同框输出 2D/3D/等高线/统计面板，便于一眼看出现象",
+    "一条 docker compose up 即可拉起 backend + nginx 双服务"
+  ],
+  "challenges": [
+    {
+      "title": "WebSocket 与多 Worker 不兼容",
+      "solution": "选择 gunicorn --worker-class eventlet -w 1 单 worker 协程模型，牺牲横向扩展换取实现稳定。"
+    },
+    {
+      "title": "matplotlib 在长任务中容易内存泄漏",
+      "solution": "强制 Agg 后端，控制 figure 数量并在每帧渲染后显式 plt.close()。"
+    },
+    {
+      "title": "CSV 列结构与算法强耦合",
+      "solution": "管线入口处显式校验 MAT_0..MAT_95 列是否齐全，缺列立即 emit error 中断任务。"
+    },
+    {
+      "title": "静态结果跨容器共享",
+      "solution": "将 results 目录同时挂载至 backend(rw) 与 nginx(ro)，避免引入对象存储。"
+    }
+  ],
+  "liveUrl": "{待补充}",
+  "githubUrl": "https://github.com/starprince1234/my-analysis-app",
+  "cover": "./assets/cover.png",
+  "screenshots": [],
+  "createdAt": "{待补充}",
+  "updatedAt": "2026-05-24"
+}
