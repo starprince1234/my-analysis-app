@@ -52,6 +52,8 @@
 │   ├── index.html
 │   ├── css/style.css
 │   └── js/main.js
+├── examples/                 # 可公开的样例数据
+│   └── sample-data/          # 可用于本地演示的 CSV 文件
 ├── nginx/                    # Nginx 反向代理与静态资源配置
 │   ├── Dockerfile
 │   └── nginx.conf
@@ -133,6 +135,12 @@ CSV 至少需要包含以下列：
 - 运行结节检测动画
 - 执行统计特征分析
 
+仓库内提供了可公开的样例 CSV，可直接用于本地演示：
+
+```text
+examples/sample-data/
+```
+
 ## 环境变量
 
 | 变量名 | 必填 | 默认值 | 说明 |
@@ -177,10 +185,10 @@ Windows PowerShell 中如果不使用 Docker，前端需要额外用静态服务
 curl http://localhost
 ```
 
-如果需要检查上传接口，请准备一份包含 `MAT_0` 到 `MAT_95` 的 CSV，再执行：
+如果需要检查上传接口，可以使用仓库中的样例 CSV：
 
 ```bash
-curl -X POST http://localhost/api/upload -F "file=@sample.csv"
+curl -X POST http://localhost/api/upload -F "file=@examples/sample-data/02b4b53d87db4a3c8295f285c5521cc8_1-1cm-2.5cm.CSV"
 ```
 
 ## 构建
@@ -253,7 +261,7 @@ http://localhost
 ### 上传 CSV
 
 ```bash
-curl -X POST http://localhost/api/upload -F "file=@sample.csv"
+curl -X POST http://localhost/api/upload -F "file=@examples/sample-data/02b4b53d87db4a3c8295f285c5521cc8_1-1cm-2.5cm.CSV"
 ```
 
 成功响应示例：
@@ -316,9 +324,9 @@ SN
 
 注意：
 
-- 当前项目未提交真实样例 CSV。
-- `backend/uploads/` 中的本地上传数据不会提交到 GitHub。
-- 如果要公开样例数据，请先确认数据已脱敏，并放在单独的 `examples/` 或 `sample/` 目录。
+- 仓库中的 `examples/sample-data/` 是已确认可公开的样例数据。
+- `backend/uploads/` 是运行时上传目录，不应提交到 GitHub。
+- 如需新增样例数据，请确认已脱敏，并放在 `examples/sample-data/`。
 
 ## 数据库说明
 
